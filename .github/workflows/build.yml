@@ -24,10 +24,10 @@ jobs:
           [ -d $GITHUB_WORKSPACE/applications/luci-app-diskman/htdocs ] && cp -R $GITHUB_WORKSPACE/applications/luci-app-diskman/htdocs/* /tmp/luci-app-diskman/www/
           [ -d $GITHUB_WORKSPACE/applications/luci-app-diskman/po ] && sudo -E apt-get -y install gcc make && \
           mkdir -p /tmp/po2lmo && mkdir -p /tmp/luci-app-diskman/usr/lib/lua/luci/i18n/ && \
-          wget -O /tmp/po2lmo/po2lmo.c https://raw.githubusercontent.com/openwrt/luci/openwrt-23.03/modules/luci-base/src/po2lmo.c && \
-          wget -O /tmp/po2lmo/Makefile https://raw.githubusercontent.com/openwrt/luci/openwrt-23.03/modules/luci-base/src/Makefile && \
-          wget -O /tmp/po2lmo/template_lmo.h https://raw.githubusercontent.com/openwrt/luci/openwrt-23.03/modules/luci-base/src/template_lmo.h && \
-          wget -O /tmp/po2lmo/template_lmo.c https://raw.githubusercontent.com/openwrt/luci/openwrt-23.03/modules/luci-base/src/template_lmo.c && \
+          wget -O /tmp/po2lmo/po2lmo.c https://raw.githubusercontent.com/openwrt/luci/openwrt-23.05/modules/luci-base/src/po2lmo.c && \
+          wget -O /tmp/po2lmo/Makefile https://raw.githubusercontent.com/openwrt/luci/openwrt-23.05/modules/luci-base/src/Makefile && \
+          wget -O /tmp/po2lmo/template_lmo.h https://raw.githubusercontent.com/openwrt/luci/openwrt-23.05/modules/luci-base/src/template_lmo.h && \
+          wget -O /tmp/po2lmo/template_lmo.c https://raw.githubusercontent.com/openwrt/luci/openwrt-23.05/modules/luci-base/src/template_lmo.c && \
           cd /tmp/po2lmo && make po2lmo && \
           ./po2lmo $GITHUB_WORKSPACE/applications/luci-app-diskman/po/zh-cn/diskman.po /tmp/luci-app-diskman/usr/lib/lua/luci/i18n/diskman.zh-cn.lmo && \
           ./po2lmo $GITHUB_WORKSPACE/applications/luci-app-diskman/po/zh-tw/diskman.po /tmp/luci-app-diskman/usr/lib/lua/luci/i18n/diskman.zh-tw.lmo && \
@@ -49,7 +49,7 @@ jobs:
           rm -rf /tmp/luci-indexcache /tmp/luci-modulecache
           EOF
           chmod +x /tmp/luci-app-diskman/CONTROL/postinst
-          wget -O /tmp/ipkg-build https://raw.githubusercontent.com/openwrt/openwrt/openwrt-23.03/scripts/ipkg-build && \
+          wget -O /tmp/ipkg-build https://raw.githubusercontent.com/openwrt/openwrt/openwrt-23.05/scripts/ipkg-build && \
           chmod +x /tmp/ipkg-build && \
           /tmp/ipkg-build -o root -g root /tmp/luci-app-diskman /tmp
       - name: Create Release
